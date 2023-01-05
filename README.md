@@ -7,7 +7,7 @@ Compatable with Godot 3.5.1
 
 Features:
 1. Implement IME input for Godot HTML export
-2. Enter will trigger the "text_entered(new_text : String)" signal
+2. Enter key will trigger the "text_entered(new_text : String)" signal
 
 
 How to use:
