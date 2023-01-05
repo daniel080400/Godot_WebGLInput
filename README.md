@@ -15,6 +15,7 @@ How to use:
 2. Attach that script to anywhere in scene
 3. Done, now add some LineEdit into scene, and test it in a html export
 
+*Reminder: In LineEdit, remember to apply fonts that actually support your input language, or it won't even display
 
 Limitations:
 1. Currently the caret is not displayed
