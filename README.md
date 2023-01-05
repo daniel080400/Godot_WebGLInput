@@ -5,11 +5,15 @@ Implement IME into Godot's HTML export
 
 Compatable with Godot 3.5.1
 
+Features:
+1. Implement IME input for Godot HTML export
+2. Enter will trigger the "text_entered(new_text : String)" signal
+
 
 How to use:
-1. Download the WebGLInput.gd file
-2. Attach the script to anywhere in scene
-3. Done, now add some LineEdit into scene and try it in a html export
+1. Download the "WebGLInput.gd" file
+2. Attach that script to anywhere in scene
+3. Done, now add some LineEdit into scene, and test it in a html export
 
 
 Limitations:
