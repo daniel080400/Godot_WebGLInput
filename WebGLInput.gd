@@ -5,6 +5,7 @@ extends Node
 #
 #
 
+class_name WebGLInput
 
 ## The control object ( to mimic Control class behavior in this script)
 var control : Control
@@ -44,14 +45,18 @@ func _process(_delta):
 	# If "ENTER" key is pressed on HTML (Submit)
 	if JavaScript.eval("submitted"):
 		# Switch off the "submitted" flag
-		JavaScript.eval("submitted = false")
+		JavaScript.eval("submitted = false;")
+		
+		# release focus from current focused ui
+		current_focused_ui.release_focus()
 		
 		# Submit as LineEdit
 		if current_focused_ui is LineEdit:
 			var line_edit = current_focused_ui as LineEdit
 			submit_as_line_edit(line_edit)
 		
-		
+		# clear current focused ui
+		current_focused_ui = null
 		
 	# If focused on LineEdit
 	if current_focused_ui is LineEdit:
@@ -120,7 +125,7 @@ func construct_input_field(_position : Vector2, _width : float, _height : float)
 	# Create a event when "ENTER" is pressed
 	JavaScript.eval("""
 		input.addEventListener("keydown", function(event){
-			if (event.keyCode === 13){
+			if (event.keyCode === 13 ){
 				submitted = true;
 			}
 		})
@@ -152,7 +157,13 @@ func update_input_field(_position : Vector2, _width : float, _height : float):
 
 func hide_input_field():
 	# Hide the html input field
-	JavaScript.eval('if(input != null) { input.style.display = "none" } ')
+	JavaScript.eval('if(input != null) { input.style.display = "none" }')
+	
+	# Clear the html input value
+	JavaScript.eval('if(input != null) { input.value = "" } ')
+	
+	# Remove focus from HTMl input
+	JavaScript.eval('input.blur();')
 	
 	return
 
