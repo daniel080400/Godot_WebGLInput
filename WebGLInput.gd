@@ -76,11 +76,11 @@ func _on_ui_changed_focus(_new_ui):
 		JavaScript.eval('input.value="' + line_edit.text + '";')
 
 
-func update_as_line_edit(line_edit):
-	# Get LineEdit's position, width and height
-	var position = line_edit.rect_global_position
-	var width = line_edit.rect_size.x
-	var height = line_edit.rect_size.y
+func update_as_line_edit(line_edit: LineEdit):
+	# Get LineEdit's position, width and height (divide by screen scale)
+	var position = line_edit.rect_global_position / OS.get_screen_scale()
+	var width = line_edit.rect_size.x / OS.get_screen_scale()
+	var height = line_edit.rect_size.y / OS.get_screen_scale()
 	
 	update_input_field(position, width, height)
 	
@@ -88,6 +88,7 @@ func update_as_line_edit(line_edit):
 	var text : String = JavaScript.eval('input.value')
 	if (line_edit.text != text):
 		line_edit.text = text
+		line_edit.emit_signal("text_changed", line_edit.text)
 	
 	return
 
@@ -166,6 +167,5 @@ func hide_input_field():
 	JavaScript.eval('input.blur();')
 	
 	return
-
 
 
